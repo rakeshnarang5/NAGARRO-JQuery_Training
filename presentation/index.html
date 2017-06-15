@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -67,7 +68,7 @@ function createTableMarkup() {
 
         function createEntryMarkup(entry, i) {
             var retVal = "";
-            retVal += "<tr><td><img src=\"./img/edit.jpg\" id=\"editImg\" onclick=\"edit("+ entry.id + ")\"><img src=\"./img/delete.png\" id=\"editImg\" onclick=\"deleteEntry(" + i + ")\"></td><td>" + entry.name + "</td><td>" + entry.email + "</td><td>" + entry.phone + "</td><td>" + entry.website + "</td></tr>";
+            retVal += "<tr><td><img src=\"../res/img/edit.jpg\" id=\"editImg\" onclick=\"edit("+ entry.id + ")\"><img src=\"../res/img/delete.png\" id=\"editImg\" onclick=\"deleteEntry(" + i + ")\"></td><td>" + entry.name + "</td><td>" + entry.email + "</td><td>" + entry.phone + "</td><td>" + entry.website + "</td></tr>";
             return retVal;
         }
 
