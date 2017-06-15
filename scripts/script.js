@@ -1,11 +1,11 @@
     var users = [];
 
+
     $.getJSON("http://jsonplaceholder.typicode.com/users", function(json) {
-        //console.log(json);
 
         users = json;
 
-        //console.log(users);
+        console.log(users);
 
         createTable(users);
 
@@ -24,21 +24,7 @@
 
         $("#table_here").html(table);
 
-        //document.write(table);
     }
-
-    //  $.getJSON( "http://jsonplaceholder.typicode.com/users", function( data ) {
-    //      console.log(data);
-    //   var items = [];
-    //   $.each( data, function( key, val ) {
-    //     items.push( "<li id='" + key + "'>" + val + "</li>" );
-    //   });
-
-    //   $( "<ul/>", {
-    //     "class": "my-new-list",
-    //     html: items.join( "" )
-    //   }).appendTo( "body" );
-    // });
 
 
     function edit(id) {
@@ -64,3 +50,22 @@
         retVal += "<tr><td><img src=\"../res/img/edit.jpg\" id=\"editImg\" onclick=\"edit(" + entry.id + ")\"><img src=\"../res/img/delete.png\" id=\"editImg\" onclick=\"deleteEntry(" + i + ")\"></td><td>" + entry.name + "</td><td>" + entry.email + "</td><td>" + entry.phone + "</td><td>" + entry.website + "</td></tr>";
         return retVal;
     }
+
+    $(document).ready(function() {
+
+        $("#btnAdd").click(function() {
+                document.getElementById("overlay").style.display = "block";
+
+            });
+
+            $("#btnClose").click(function() {
+                document.getElementById("overlay").style.display = "none";
+
+            });
+
+        $("form#userform").submit(function() {
+            
+        });
+    });
+
+                

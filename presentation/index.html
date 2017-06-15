@@ -6,13 +6,60 @@
 
     <script type="text/javascript" src="../scripts/script.js"></script>
 
+    <link rel="stylesheet" href="../styles/styles.css">
+
 </head>
 
 <body>
 
     <div id="table_here"></div>
     <br>
-    <button id="btnAdd" value="add">Add User</button>
+    <img src="../res/img/adduser.png" id="btnAdd">
+
+
+        <div id="overlay">
+
+        <form id="userform">
+            <div class="details">
+                <fieldset>
+                    <legend>Details of the user:-</legend>
+                    <div>
+                        <label for="username">Username: </label>
+                        <input id="username" type="text" name="username" />
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <label for="emailId">Email Id: </label>
+                        <input id="emailId" type="text" name="emailId" />
+                    </div>
+
+                    <br>
+                    <div>
+                        <label for="phoneno">Phone number: </label>
+                        <input id="phoneno" type="text" name="phoneno" />
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <label for="website">Website: </label>
+                        <input id="website" type="text" name="website" />
+                    </div>
+
+                    <br>
+
+                    <input type="submit" value="Save">
+                    <button id="btnClose" value="close">Close</button>
+                </fieldset>
+            </div>
+        </form>
+
+
+
+    </div>
+
 
 </body>
 
