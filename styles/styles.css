@@ -11,7 +11,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(255, 255, 255, 0.85);
             /* Black background with opacity */
             z-index: 2;
             /* Specify a stack order in case you're using a different order for other elements */
@@ -24,3 +24,10 @@
             max-height: 300px;
             margin: auto;
         }
+
+.container {
+    margin: auto;
+    width: 50%;
+    border: 1px;
+    padding: 10px;
+}

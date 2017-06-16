@@ -1,8 +1,10 @@
     var users = [];
+    var defaultUsers = [];
 
     $.getJSON("http://jsonplaceholder.typicode.com/users", function(json) {
         if (users.length < 1) {
             users = json;
+            defaultUsers = json;
         }
         createTable(users);
     })
@@ -63,8 +65,8 @@
 
         users = JSON.parse(localStorage.getItem("users"));
 
-
         $("#btnAdd").click(function() {
+            $("#currentlyEditing").val((users.length).toString());
             document.getElementById("overlay").style.display = "block";
         });
 
