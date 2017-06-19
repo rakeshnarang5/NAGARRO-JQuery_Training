@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+
+	<style type="text/css">
+		#jquery-carousel {
+			position: relative;
+			width: 800px;
+			height: 300px;
+		}
+
+		#jquery-carousel ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+
+		#jquery-carousel li {
+			padding: 0;
+			margin:0;
+			text-align: center;
+			position: absolute;
+		}
+
+		#jquery-carousel li {
+			display: none;
+		}
+
+		#jquery-carousel li.active {
+			display: inline-block;
+		}
+
+		#jquery-carousel .prev,
+		#jquery-carousel .next {
+			background-color: gray;
+			z-index: 200;
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			top: 100px;
+			font-weight: bold;
+			border-radius: 10px;
+		}
+
+		#jquery-carousel .prev a,
+		#jquery-carousel .next a {
+			color: white;
+			font-weight: bold;
+			text-decoration: none;
+			margin-left: 5px;
+		}
+
+		#jquery-carousel .prev {
+			left: 5px;
+		}
+
+		#jquery-carousel .next {
+			right: 5px;
+		}
+	</style>
+</head>
+<body>
+
+	<fieldset>
+		<legend>User input:-</legend>
+		<label for="imageCount">Enter a number</label>
+		<input type="text" name="imageCount" id="imageCount" value="2">
+		<button type="submit" value="submit" id="btnSubmit">Submit</button>
+	</fieldset>
+
+	<br>
+
+	<div id="jquery-carousel">
+
+		<!-- previous button -->
+		<div class="prev"><a href="">&lt;</a></div>
+
+		<ul>
+			<li class="active">
+			<img src="../res/img/img1.jpg" />
+		</li>
+		<li class="active">
+			<img src="../res/img/img2.jpg" />
+		</li>
+		<li>
+			<img src="../res/img/img3.jpg" />
+		</li>
+		<li>
+			<img src="../res/img/img4.jpg" />
+		</li>
+		<li>
+			<img src="../res/img/img5.jpg" />
+		</li>
+		<li>
+			<img src="../res/img/img6.jpg" />
+		</li>
+		<li>
+			<img src="../res/img/img7.jpg" />
+		</li>
+		<li>
+			<img src="../res/img/img8.jpg" />
+		</li>
+		<li>
+			<img src="../res/img/img9.jpg" />
+		</li>
+		<li>
+			<img src="../res/img/img10.jpg" />
+		</li>
+		</ul>
+
+		<!-- next button -->
+		<div class="next"><a href="">&gt;</a></div>
+	</div>
+
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			var count;
+			
+
+			$("#btnSubmit").click(function(e) {
+				e.preventDefault();
+				count = $("#imageCount").val();
+				console.log(count);
+			})
+
+			$("#jquery-carousel .next a").click(function(e) {
+				e.preventDefault();
+
+				count = $("#imageCount").val();
+
+				console.log("From inside .next" + count);
+
+				var currentSlide = $("#jquery-carousel li.active");
+				var nextSlide = $("#jquery-carousel li.active").next();
+				currentSlide.removeClass("active").hide();
+
+				if (nextSlide.length === 0) {
+					nextSlide = $("#jquery-carousel li").first();
+				}
+
+				nextSlide.addClass("active").show();
+			});
+
+			$("#jquery-carousel .prev a").click(function(e) {
+				e.preventDefault();
+
+				count = $("#imageCount").val();
+
+
+				console.log("From inside .prev" + count);
+
+
+				var currentSlide = $("#jquery-carousel li.active");
+				var prevSlide = $("#jquery-carousel li.active").prev();
+				currentSlide.removeClass("active").hide();
+
+				if (prevSlide.length === 0) {
+					prevSlide = $("#jquery-carousel li").last();
+				}
+
+				prevSlide.addClass("active").show();
+			});
+
+		});
+	</script>
+
+</body>
+</html>
