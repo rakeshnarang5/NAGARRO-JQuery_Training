@@ -17,7 +17,7 @@
         }
         table += "</table>";
         $("#table_here").html(table);
-        $("#currentlyEditing").val((users.length).toString());
+        $("#btnSave").attr("value", (users.length).toString());
         saveState();
     }
 
@@ -26,10 +26,9 @@
     }
 
     function edit(id) {
-        document.getElementById("overlay").style.display = "block";
-        // $("#overlay").attr("style","display:block;");
-       $("#btnSave").attr("value",id.toString());
-        // $("#currentlyEditing").val(id.toString());
+        id--;
+        $("#overlay").attr("style", "display:block;");
+        $("#btnSave").attr("value", id.toString());
         $("#username").val(users[id].name);
         $("#emailId").val(users[id].email);
         $("#phoneno").val(users[id].phone);
@@ -41,7 +40,7 @@
         if (sure) {
             users.splice(id - 1, 1);
             createTable(users);
-        } 
+        }
     }
 
     function createTableMarkup() {
@@ -52,8 +51,7 @@
 
     function createEntryMarkup(entry, i) {
         var retVal = "";
-        retVal += "<tr><td><div class=\"btnEdit\" id=\"editImg\" onclick=\"edit(" + i + ")\"></div><div class=\"btnDelete\" id=\"deleteImg\" onclick=\"deleteEntry("+ i +")\"></div></td><td>" + entry.name + "</td><td>" + entry.email + "</td><td>" + entry.phone + "</td><td>" + entry.website + "</td></tr>";
-        // retVal += "<tr><td><img src=\"../res/img/edit.jpg\" id=\"editImg\" onclick=\"edit(" + (i - 1) + ")\"><img src=\"../res/img/delete.png\" id=\"deleteImg\" onclick=\"deleteEntry(" + i + ")\"></td><td>" + entry.name + "</td><td>" + entry.email + "</td><td>" + entry.phone + "</td><td>" + entry.website + "</td></tr>";
+        retVal += "<tr><td><div class=\"btnEdit\" id=\"editImg\" onclick=\"edit(" + i + ")\"></div><div class=\"btnDelete\" id=\"deleteImg\" onclick=\"deleteEntry(" + i + ")\"></div></td><td>" + entry.name + "</td><td>" + entry.email + "</td><td>" + entry.phone + "</td><td>" + entry.website + "</td></tr>";
         return retVal;
     }
 
@@ -68,14 +66,24 @@
 
         users = JSON.parse(localStorage.getItem("users"));
 
+        function validateEmail($email) {
+            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            return emailReg.test($email);
+        }
+
+        function validateURL($website) {
+            var urlReg = /[www]?\..*?\.(com|net|org)/;
+            return urlReg.test($website);
+        }
+
         $("#btnAdd").click(function() {
-            $("#btnSave").attr("value",(users.length).toString());
-            // $("#currentlyEditing").val((users.length).toString());
-            document.getElementById("overlay").style.display = "block";
+            $("#btnSave").attr("value", (users.length).toString());
+            $("#overlay").attr("style", "display:block;");
+
         });
 
         $("#btnClose").click(function(e) {
-            document.getElementById("overlay").style.display = "none";
+            $("#overlay").attr("style", "display:none;");
             resetFormFields();
             e.preventDefault();
         });
@@ -87,40 +95,39 @@
             $phoneno = $("#phoneno").val();
             $website = $("#website").val();
             $currentlyEditing = $("#btnSave").attr("value");
-            //$("#currentlyEditing").val();
 
-            if ($username === "") {
+            if (!$username) {
                 alert("username can't be blank");
-                return;
-            }
-
-            if ($emailId === "") {
-                alert("email id can't be blank");
-                return;
-            }
-
-            if ($currentlyEditing < users.length) {
-                users[$currentlyEditing].name = $username;
-                users[$currentlyEditing].email = $emailId;
-                users[$currentlyEditing].phoneno = $phoneno;
-                users[$currentlyEditing].website = $website;
+            } else if (!validateEmail($emailId)) {
+                alert("not a valid email");
+            } else if ($phoneno.length !== 10) {
+                alert("phone number has to be exactly 10 digits");
+            } else if (!validateURL($website)) {
+                alert("not a valid url");
             } else {
-                var newuser = {
-                    id: users.length + 1,
-                    name: $username,
-                    username: null,
-                    email: $emailId,
-                    address: null,
-                    phone: $phoneno,
-                    website: $website,
-                    company: null
+                if ($currentlyEditing < users.length) {
+                    users[$currentlyEditing].name = $username;
+                    users[$currentlyEditing].email = $emailId;
+                    users[$currentlyEditing].phone = $phoneno;
+                    users[$currentlyEditing].website = $website;
+                } else {
+                    var newuser = {
+                        id: users.length + 1,
+                        name: $username,
+                        username: null,
+                        email: $emailId,
+                        address: null,
+                        phone: $phoneno,
+                        website: $website,
+                        company: null
+                    }
+                    users.push(newuser);
                 }
-                users.push(newuser);
             }
 
             createTable(users);
             resetFormFields();
             e.preventDefault();
-            document.getElementById("overlay").style.display = "none";
+            $("#overlay").attr("style", "display:none;");
         });
     });
