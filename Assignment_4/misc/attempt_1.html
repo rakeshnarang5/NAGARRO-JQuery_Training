@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+
+</head>
+<body>
+
+	<div id="carousel-creator">
+		<fieldset>
+			<legend>Carousel Creator:-</legend>
+
+			<div id="enter-images-div">
+				<label for="imageCount">Enter number of images you want to use (2-10): </label>
+				<span>
+					<input type="text" name="imageCount" id="imageCount" value="2">
+				</span>
+				<br>
+				<button id="btnSubmit" value="btnSubmit">Create Carousel</button>
+			</div>
+		</fieldset>
+	</div>
+
+		<div id="images_display">
+		<div id="buttons_images_container">
+			<button id="btnPrev" value="btnPrev">Prev</button>
+			<span></span><div id="images_go_here">
+			</div></span>
+			<button id="btnNext" value="btnNext">Next</button>
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+
+			var next = 0;
+			var count = 0;
+
+			// function setImagesGoHere() {
+			// 	var retVal = "";
+
+			// 	//count 4
+			// 	//next 5
+			// 	// img5 to img 9 will be added
+
+			// 	for (var i = (next%10) ; i <= ((next + count)%10) ; i++) {
+			// 		retVal += "<span><img src=\"../res/img/img" + next + ".jpg\" /></span>";
+			// 	}
+
+			// 	next = next + count + 1;
+
+
+			// 	return retVal;
+			// }
+
+			// $("#btnNext").click(function(e)) {
+
+			// }
+
+		$("#btnSubmit").click(function(e) {
+			e.preventDefault();
+			console.log("submit clicked");
+			count = $("#imageCount").val();
+			console.log(count);
+
+			var width = 400 * count;
+			
+			console.log(width);
+
+			$("#images_go_here").css('width', width+'px');
+
+			var html = "";
+
+			if (count == 0) {
+				html += "";
+				$("#images_go_here").html(html);
+			}
+
+			for (var i = 0 ; i < count ; i++) {
+				html += "<span><img src=\"../res/img/img" + (i+1) + ".jpg\" /></span>";
+			}
+
+			$("#images_go_here").html(html);
+		});
+
+		// tag for one image
+		// <span><img src="../res/img/img1.jpg" /></span>
+
+	})
+
+	</script>
+
+</body>
+</html>

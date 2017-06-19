@@ -27,7 +27,9 @@
 
     function edit(id) {
         document.getElementById("overlay").style.display = "block";
-        $("#currentlyEditing").val(id.toString());
+        // $("#overlay").attr("style","display:block;");
+       $("#btnSave").attr("value",id.toString());
+        // $("#currentlyEditing").val(id.toString());
         $("#username").val(users[id].name);
         $("#emailId").val(users[id].email);
         $("#phoneno").val(users[id].phone);
@@ -50,7 +52,8 @@
 
     function createEntryMarkup(entry, i) {
         var retVal = "";
-        retVal += "<tr><td><img src=\"../res/img/edit.jpg\" id=\"editImg\" onclick=\"edit(" + (i - 1) + ")\"><img src=\"../res/img/delete.png\" id=\"deleteImg\" onclick=\"deleteEntry(" + i + ")\"></td><td>" + entry.name + "</td><td>" + entry.email + "</td><td>" + entry.phone + "</td><td>" + entry.website + "</td></tr>";
+        retVal += "<tr><td><div class=\"btnEdit\" id=\"editImg\" onclick=\"edit(" + i + ")\"></div><div class=\"btnDelete\" id=\"deleteImg\" onclick=\"deleteEntry("+ i +")\"></div></td><td>" + entry.name + "</td><td>" + entry.email + "</td><td>" + entry.phone + "</td><td>" + entry.website + "</td></tr>";
+        // retVal += "<tr><td><img src=\"../res/img/edit.jpg\" id=\"editImg\" onclick=\"edit(" + (i - 1) + ")\"><img src=\"../res/img/delete.png\" id=\"deleteImg\" onclick=\"deleteEntry(" + i + ")\"></td><td>" + entry.name + "</td><td>" + entry.email + "</td><td>" + entry.phone + "</td><td>" + entry.website + "</td></tr>";
         return retVal;
     }
 
@@ -66,7 +69,8 @@
         users = JSON.parse(localStorage.getItem("users"));
 
         $("#btnAdd").click(function() {
-            $("#currentlyEditing").val((users.length).toString());
+            $("#btnSave").attr("value",(users.length).toString());
+            // $("#currentlyEditing").val((users.length).toString());
             document.getElementById("overlay").style.display = "block";
         });
 
@@ -82,7 +86,8 @@
             $emailId = $("#emailId").val();
             $phoneno = $("#phoneno").val();
             $website = $("#website").val();
-            $currentlyEditing = $("#currentlyEditing").val();
+            $currentlyEditing = $("#btnSave").attr("value");
+            //$("#currentlyEditing").val();
 
             if ($username === "") {
                 alert("username can't be blank");
