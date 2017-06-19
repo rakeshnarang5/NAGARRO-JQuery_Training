@@ -2,6 +2,9 @@
 <html>
 <head>
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+
+
 </head>
 <body>
 
@@ -16,7 +19,33 @@
 </div>
 
 <script type="text/javascript">
-	
+
+	$(document).ready(function() {
+
+		$("#btnSubmit").click(function(e) {
+			e.preventDefault();
+			console.log("submit clicked");
+			var count = $("#imageCount").val();
+			console.log(count);
+
+			var html = "";
+
+			if (count == 0) {
+				html += "";
+				$("#images_go_here").html(html);
+			}
+
+			for (var i = 0 ; i < count ; i++) {
+				html += "<span><img src=\"../res/img/img" + (i+1) + ".jpg\" /></span>";
+			}
+
+			$("#images_go_here").html(html);
+		});
+
+		// tag for one image
+		// <span><img src="../res/img/img1.jpg" /></span>
+
+	})
 </script>
 
 </body>
