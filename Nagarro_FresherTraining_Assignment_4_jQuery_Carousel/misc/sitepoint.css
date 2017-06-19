@@ -1,0 +1,11 @@
+button {
+	position: absolute;
+}
+
+.next {
+	right:5px;
+}
+
+.left {
+	left:5px;
+}

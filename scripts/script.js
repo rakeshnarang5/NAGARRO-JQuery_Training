@@ -99,8 +99,6 @@
                 users[$currentlyEditing].email = $emailId;
                 users[$currentlyEditing].phoneno = $phoneno;
                 users[$currentlyEditing].website = $website;
-                resetFormFields();
-
             } else {
                 var newuser = {
                     id: users.length + 1,
@@ -116,6 +114,7 @@
             }
 
             createTable(users);
+            resetFormFields();
             e.preventDefault();
             document.getElementById("overlay").style.display = "none";
         });

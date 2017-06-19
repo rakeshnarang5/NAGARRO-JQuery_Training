@@ -1,9 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>jQuery Carousel</title>
+
+	<!-- Link to external stylesheet -->
+	<link rel="stylesheet" type="text/css" href="../styles/styles.css">
+
+	<!-- Link to jQuery script -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+
+	<div id="carousel-creator">
+		<fieldset>
+			<legend>Carousel Creator:-</legend>
+
+			<div id="enter-images-div">
+				<label for="number-images">Enter number of images you want to use (2-10): </label>
+				<span>
+					<input type="text" name="number-images" id="number-images" value="0">
+				</span>
+				<br>
+				<button id="create-carousel-button" value="create-carousel">Create Carousel</button>
+			</div>
+		</fieldset>
+	</div>
+
+	<br>
+
+	<div id="images_display">
+		<div id="buttons_images_container">
+			<img src="../res/img/left.jpg">
+			<img src="../res/img/right.jpg">
+			<div class="images_container">
+				<div style="display: inline-block;">
+					<div>
+						<img src="../res/img/img1.jpg">
+					</div>
+					<div>
+						<img src="../res/img/img2.jpg">
+					</div>
+					<div>
+						<img src="../res/img/img3.jpg">
+					</div>
+					<div>
+						<img src="../res/img/img4.jpg">
+					</div>
+					<div>
+						<img src="../res/img/img5.jpg">
+					</div>
+					<div>
+						<img src="../res/img/img6.jpg">
+					</div>
+					<div>
+						<img src="../res/img/img7.jpg">
+					</div>
+					<div>
+						<img src="../res/img/img8.jpg">
+					</div>
+					<div>
+						<img src="../res/img/img9.jpg">
+					</div>
+					<div>
+						<img src="../res/img/img10.jpg">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../scripts/script.js"></script>
 
 </body>
 </html>

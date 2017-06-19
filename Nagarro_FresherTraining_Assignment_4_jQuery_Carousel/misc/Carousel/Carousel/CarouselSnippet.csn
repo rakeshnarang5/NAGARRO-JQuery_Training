@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<snippet name="CarouselSnippet" description="" preview="code" type="block">
+<insertText location="beforeSelection">
+<![CDATA[<!--CSS-->
+#carousel {
+		width:			480px;
+		overflow:		hidden;
+
+	}
+
+	#carousel ul {
+		width:	1920px;
+		padding:0;
+		margin:0;
+	}
+
+	#carousel ul li {
+		width:480px;
+		text-align:		center;
+		height:	280px;
+		list-style:		none;
+		float:	left;
+}
+
+<!--HTML-->
+	<div id="carousel">
+          <ul>
+            <li><img src="../images/fish.jpg" alt="Fish" /></li>
+            <li><img src="../images/elephant.jpg" alt="Elephant" /></li>
+            <li><img src="../images/giraffe.jpg" alt="Giraffe" /></li>
+            <li><img src="../images/penguins.jpg" alt="Penguins" /></li>
+          </ul>
+       </div>
+
+<!--Javascript-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+
+		$("#carousel ul").each(function(){
+			// Set the interval to be 10 seconds
+			var t = setInterval(function(){
+				$("#carousel ul").animate({marginLeft:-480},1000,function(){
+					// This code runs after the animation completes
+					$(this).find("li:last").after($(this).find("li:first"));
+					// Now we've taken out the left-most list item, reset the margin
+					$(this).css({marginLeft:0});
+				})
+			},5000);
+		});
+	});
+  </script>	]]>
+</insertText>
+<insertText location="afterSelection"><![CDATA[]]>
+</insertText>
+</snippet>
