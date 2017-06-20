@@ -9,6 +9,7 @@
         createTable(users);
     })
 
+    // creates table and sets it to the #table_here div
     function createTable(json) {
         var table = "<table border=\"1px\">";
         table += createTableMarkup();
@@ -21,10 +22,12 @@
         saveState();
     }
 
+    // saves current state of the table in localstorage
     function saveState() {
         localStorage.setItem("users", JSON.stringify(users));
     }
 
+    // this function executes when edit button is clicked
     function edit(id) {
         id--;
         $("#overlay").attr("style", "display:block;");
@@ -35,6 +38,7 @@
         $("#website").val(users[id].website);
     }
 
+    // this method executes  when delete button is clicked
     function deleteEntry(id) {
         var sure = confirm("Are you sure you want to delete this entry?");
         if (sure) {
@@ -43,18 +47,21 @@
         }
     }
 
+    // table's header is created
     function createTableMarkup() {
         var retVal = "";
         retVal += "<tr><th>Actions</th><th>Name</th><th>Email</th><th>Phone</th><th>Website</th></tr>";
         return retVal;
     }
 
+    // markup for each entry is created here
     function createEntryMarkup(entry, i) {
         var retVal = "";
         retVal += "<tr><td><div class=\"btnEdit\" id=\"editImg\" onclick=\"edit(" + i + ")\"></div><div class=\"btnDelete\" id=\"deleteImg\" onclick=\"deleteEntry(" + i + ")\"></div></td><td>" + entry.name + "</td><td>" + entry.email + "</td><td>" + entry.phone + "</td><td>" + entry.website + "</td></tr>";
         return retVal;
     }
 
+    // all fields of the form are reset to default value by this function
     function resetFormFields() {
         $("#username").val("");
         $("#emailId").val("");
@@ -66,11 +73,13 @@
 
         users = JSON.parse(localStorage.getItem("users"));
 
+        // email validation
         function validateEmail($email) {
             var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
             return emailReg.test($email);
         }
 
+        // web url validation
         function validateURL($website) {
             var urlReg = /[www]?\..*?\.(com|net|org)/;
             return urlReg.test($website);
