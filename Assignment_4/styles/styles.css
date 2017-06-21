@@ -1,8 +1,48 @@
 #carousel-creator {
-	margin: auto;
-	width: 50%;
+    margin: auto;
+    width: 50%;
 }
-
-#images_container {
-	border: 1px solid black;
+#jquery-carousel {
+    position: relative;
+    height: 300px;
+}
+#jquery-carousel ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+#jquery-carousel li {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+#jquery-carousel li {
+    display: none;
+}
+#jquery-carousel li.active {
+    display: inline-block;
+}
+#jquery-carousel .prev,
+#jquery-carousel .next {
+    background-color: gray;
+    z-index: 200;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 100px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+#jquery-carousel .prev a,
+#jquery-carousel .next a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 5px;
+}
+#jquery-carousel .prev {
+    left: 5px;
+}
+#jquery-carousel .next {
+    right: 5px;
 }

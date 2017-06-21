@@ -7,7 +7,6 @@
 	<style type="text/css">
 		#jquery-carousel {
 			position: relative;
-			width: 800px;
 			height: 300px;
 		}
 
@@ -21,7 +20,6 @@
 			padding: 0;
 			margin:0;
 			text-align: center;
-			/*position: absolute;*/
 		}
 
 		#jquery-carousel li {
@@ -30,7 +28,6 @@
 
 		#jquery-carousel li.active {
 			display: inline-block;
-			/*position: absolute;*/
 		}
 
 		#jquery-carousel .prev,
@@ -76,95 +73,224 @@
 	<div id="jquery-carousel">
 
 		<!-- previous button -->
-		<div class="prev"><a href="">&lt;</a></div>
+		<div class="prev"><a href="" id="prevA">&lt;</a></div>
 
 		<ul>
-			<li class="active">
+			<li id="img1">
 			<img src="../res/img/img1.jpg" />
 		</li>
-		<li class="active">
+		<li id="img2">
 			<img src="../res/img/img2.jpg" />
 		</li>
-		<li>
+		<li id="img3">
 			<img src="../res/img/img3.jpg" />
 		</li>
-		<li>
+		<li id="img4">
 			<img src="../res/img/img4.jpg" />
 		</li>
-		<li>
+		<li id="img5">
 			<img src="../res/img/img5.jpg" />
 		</li>
-		<li>
+		<li id="img6">
 			<img src="../res/img/img6.jpg" />
 		</li>
-		<li>
+		<li id="img7">
 			<img src="../res/img/img7.jpg" />
 		</li>
-		<li>
+		<li id="img8">
 			<img src="../res/img/img8.jpg" />
 		</li>
-		<li>
+		<li id="img9">
 			<img src="../res/img/img9.jpg" />
 		</li>
-		<li>
+		<li id="img10">
 			<img src="../res/img/img10.jpg" />
 		</li>
 		</ul>
 
 		<!-- next button -->
-		<div class="next"><a href="">&gt;</a></div>
+		<div class="next"><a href="" id="nextA">&gt;</a></div>
 	</div>
 
 
 	<script type="text/javascript">
 		$(document).ready(function() {
 
-			var count;
-			
+			function reset() {
+				count = 2;
+				prev = 0;
+				next = 1;
 
+				resetImageProps();
+			}
+
+			function resetImageProps() {
+				for (var i = 1 ; i <= 10 ; i++) {
+					$("#img"+i).removeClass("active").hide();
+					$("#img"+i).css("position", "");
+				}
+			}
+
+			var count = 2, prev = 0, next = 1;
+
+			function enableOrDisable() {
+				if (prev < count) {
+					$(".prev").hide();
+				}
+				if (prev >= count) {
+					$(".prev").show();
+				}
+				if (next > 10) {
+					$(".next").hide();
+				} 
+				if(next <= 10) {
+					$(".next").show();
+				}
+			}
+
+			
 			$("#btnSubmit").click(function(e) {
 				e.preventDefault();
-				count = $("#imageCount").val();
-				console.log(count);
-			})
 
-			$("#jquery-carousel .next a").click(function(e) {
-				e.preventDefault();
+				reset();
 
 				count = $("#imageCount").val();
 
-				console.log("From inside .next" + count);
+				$("#jquery-carousel").css("width", count*400+"px");
 
-				var currentSlide = $("#jquery-carousel li.active");
-				var nextSlide = $("#jquery-carousel li.active").next();
-				currentSlide.removeClass("active").hide();
+				console.log("Count: " + count + "\nPrev: " + prev + "\nNext: " + next);
 
-				if (nextSlide.length === 0) {
-					nextSlide = $("#jquery-carousel li").first();
+				var init = next;
+				var final = +next + +count;
+
+				console.log("Init: " + init + " Final: " + final);				
+
+				for (var i = init ; i < final ; i++) {
+					$("#img"+i).addClass("active").show();
+
+					if (i == final-1) {
+						$("#img"+i).css("position","absolute");
+					}
+					next++;
 				}
 
-				nextSlide.addClass("active").show();
+				enableOrDisable();
+
+				console.log("Count: " + count + "\nPrev: " + prev + "\nNext: " + next);
+
+
 			});
 
-			$("#jquery-carousel .prev a").click(function(e) {
+			// implementing next functionality
+
+			
+				$("#jquery-carousel .next a").click(function(e) {
 				e.preventDefault();
 
-				count = $("#imageCount").val();
+				//count = $("#imageCount").val();
 
+				console.log("Count: " + count + "\nPrev: " + prev + "\nNext: " + next);
 
-				console.log("From inside .prev" + count);
+				resetImageProps();
 
+				var init = next;
+				var final = +next + +count;
 
-				var currentSlide = $("#jquery-carousel li.active");
-				var prevSlide = $("#jquery-carousel li.active").prev();
-				currentSlide.removeClass("active").hide();
+				console.log("Init: " + init + " Final: " + final);				
 
-				if (prevSlide.length === 0) {
-					prevSlide = $("#jquery-carousel li").last();
+				for (var i = init ; i < final ; i++) {
+					$("#img"+i).addClass("active").show();
+
+					if (i == final-1) {
+						$("#img"+i).css("position","absolute");
+					}
+
+					prev++;
+					next++;
 				}
 
-				prevSlide.addClass("active").show();
+				// for (var i = next ; i < count ; i++) {
+				// 	$("#img"+i).addClass("active").show();
+				// 	next++;
+				// }
+
+				enableOrDisable();
+
+				console.log("Count: " + count + "\nPrev: " + prev + "\nNext: " + next);
+
 			});
+
+
+			// $("#jquery-carousel .next a").click(function(e) {
+			// 	e.preventDefault();
+
+			// 	count = $("#imageCount").val();
+
+			// 	console.log("From inside .next" + count);
+
+			// 	var currentSlide = $("#jquery-carousel li.active");
+			// 	var nextSlide = $("#jquery-carousel li.active").next();
+			// 	currentSlide.removeClass("active").hide();
+
+			// 	if (nextSlide.length === 0) {
+			// 		nextSlide = $("#jquery-carousel li").first();
+			// 	}
+
+			// 	nextSlide.addClass("active").show();
+			// });
+
+			// implementing the previous button functionality
+
+		
+				$("#jquery-carousel .prev a").click(function(e) {
+				e.preventDefault();
+
+				console.log("Before execution of previous: " + "Count: " + count + "\nPrev: " + prev + "\nNext: " + next);
+
+				resetImageProps();
+
+				var init = (+prev - +count) + 1;
+				var final = +next - +count;
+
+				for (var i = init ; i < final ; i++) {
+					$("#img"+i).addClass("active").show();
+
+					if (i == final-1) {
+						$("#img"+i).css("position","absolute");
+					}
+
+					prev--;
+					next--;
+				}
+
+				enableOrDisable();
+
+				console.log("After execution of previous: " + "Count: " + count + "\nPrev: " + prev + "\nNext: " + next);
+
+
+			});
+
+			
+
+			// $("#jquery-carousel .prev a").click(function(e) {
+			// 	e.preventDefault();
+
+			// 	count = $("#imageCount").val();
+
+
+			// 	console.log("From inside .prev" + count);
+
+
+			// 	var currentSlide = $("#jquery-carousel li.active");
+			// 	var prevSlide = $("#jquery-carousel li.active").prev();
+			// 	currentSlide.removeClass("active").hide();
+
+			// 	if (prevSlide.length === 0) {
+			// 		prevSlide = $("#jquery-carousel li").last();
+			// 	}
+
+			// 	prevSlide.addClass("active").show();
+			// });
 
 		});
 	</script>
